@@ -34,9 +34,12 @@ jobs:
         run: pnpm typecheck
 
   publish:
-    name: Publish to npm
+    name: Publish to GitHub Packages
     needs: typecheck
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - name: Checkout code
@@ -52,7 +55,8 @@ jobs:
         with:
           node-version: 20.x
           cache: "pnpm"
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@daya-devraha'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -63,4 +67,4 @@ jobs:
       - name: Publish
         run: pnpm publish --access public --no-git-checks
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
