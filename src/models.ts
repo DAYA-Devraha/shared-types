@@ -49,6 +49,8 @@ export interface Cow {
   calf: boolean;
   gender: CowGender;
   adoptionStatus: boolean;
+  sponsorName?: string | null;
+  sponsorId?: string | null;
   specialCare: boolean;
   createdAt?: string;
   updatedAt?: string;
