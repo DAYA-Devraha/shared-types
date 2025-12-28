@@ -51,6 +51,7 @@ export interface Cow {
   adoptionStatus: boolean;
   sponsorName?: string | null;
   sponsorId?: string | null;
+  eartag?: string | null;
   specialCare: boolean;
   createdAt?: string;
   updatedAt?: string;
@@ -69,6 +70,7 @@ export interface CowBackend {
   calf: boolean;
   gender?: string; // will normalize to CowGender
   adoptionStatus: boolean;
+  eartag?: string | null;
   specialCare: boolean;
   createdAt?: string;
   updatedAt?: string;
