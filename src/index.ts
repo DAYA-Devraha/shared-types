@@ -11,6 +11,7 @@ export type {
   CowGender,
   Cow,
   CowBackend,
+  CowUpsertPayload,
   DonationStatus,
   DonationType,
   Donation,
@@ -20,6 +21,9 @@ export type {
   PujaDetails,
   PujaOrder,
 } from './models.js';
+
+// Normalizers
+export { normalizeGender, normalizeCow } from './normalizers.js';
 
 // API types
 export type {

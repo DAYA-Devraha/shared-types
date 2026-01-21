@@ -37,27 +37,6 @@ export interface Admin {
 export type CowGender = 'Male' | 'Female';
 
 /**
- * Cow model - represents a cow in the system
- * Used in: kamdhenuseva-frontend
- */
-export interface Cow {
-  _id: string;
-  cowId?: number; // optional until backfill is complete
-  name: string;
-  photos?: string[];
-  description: string;
-  calf: boolean;
-  gender: CowGender;
-  adoptionStatus: boolean;
-  sponsorName?: string | null;
-  sponsorId?: string | null;
-  eartag?: string | null;
-  specialCare: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-/**
  * Raw cow shape as it comes from the API
  * Gender may be in various formats from legacy data
  */
@@ -68,12 +47,62 @@ export interface CowBackend {
   photos?: string[];
   description: string;
   calf: boolean;
-  gender?: string; // will normalize to CowGender
+  gender?: string; // May be legacy format, will normalize to CowGender
   adoptionStatus: boolean;
+  sponsorName?: string | null;
+  sponsorId?: string | null;
+  totalDonated?: number;
+  donators?: string[];
   eartag?: string | null;
   specialCare: boolean;
+  testimonials?: boolean;
+  youtubeUrl?: string | null;
   createdAt?: string;
   updatedAt?: string;
+}
+
+/**
+ * Normalized cow for frontend use
+ * Used in: kamdhenuseva-frontend, dayadevraha-admin-frontend
+ */
+export interface Cow {
+  _id: string;
+  cowId?: number; // optional until backfill is complete
+  name: string;
+  photos: string[];
+  description: string;
+  calf: boolean;
+  gender: CowGender;
+  adoptionStatus: boolean;
+  sponsorName: string | null;
+  sponsorId: string | null;
+  totalDonated: number;
+  donators: string[];
+  eartag: string | null;
+  specialCare: boolean;
+  testimonials: boolean;
+  youtubeUrl: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+/**
+ * Payload for creating/updating a cow (admin only)
+ */
+export interface CowUpsertPayload {
+  name?: string;
+  description?: string;
+  calf?: boolean;
+  gender?: CowGender;
+  adoptionStatus?: boolean;
+  specialCare?: boolean;
+  photos?: string[];
+  images?: File[];
+  sponsorName?: string | null;
+  sponsorId?: string | null;
+  eartag?: string | null;
+  testimonials?: boolean;
+  youtubeUrl?: string | null;
 }
 
 /**
